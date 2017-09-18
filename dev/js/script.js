@@ -71,7 +71,16 @@ var dir1 = (current.x > image.width() / 2) ? angle : 360 - angle;
     image.position({ x:0, y:0});
 
     var radius = image.height();
-console.log({x: radius * cosA, y: radius * Math.sqrt(1 - Math.pow(cosA, 2))});
+
+var midX = (dir1 < 180) ? 
+    image.width() / 2 + radius * Math.sqrt(1 - Math.pow(cosA, 2))
+    :
+    image.width() / 2 - radius * Math.sqrt(1 - Math.pow(cosA, 2));
+var midY = image.height() / 2 - radius * cosA;
+
+topMiddle.setX(midX);
+topMiddle.setY(midY);
+
     if(rotateFlage){
         image.rotation(dir1);
     }
@@ -229,7 +238,7 @@ imageObj1.onload = function() {
     darthVaderImg.strokeEnabled(false);
     layer.draw();
 };
-imageObj1.src = '/konvaRotation/files/darth-vader.jpg';
+imageObj1.src = './files/darth-vader.jpg';
 
 var imageObj2 = new Image();
 imageObj2.onload = function() {
@@ -237,7 +246,7 @@ imageObj2.onload = function() {
     yodaImg.strokeEnabled(false);
     layer.draw();
 };
-imageObj2.src = '/konvaRotation/files/yoda.jpg';
+imageObj2.src = './files/yoda.jpg';
 
 
 
