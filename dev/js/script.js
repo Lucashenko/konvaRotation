@@ -10,7 +10,7 @@ function update(activeAnchor) {
     var topMiddle = group.get('.topMiddle')[0];
     // topMiddle.setX(0);
     // topMiddle.setY(0);
-    
+var emptyGroup = new Konva.Group()
     var image = group.get('Image')[0];
 
     var anchorX = activeAnchor.getX();
@@ -58,6 +58,7 @@ function update(activeAnchor) {
             // console.log('height!!!!!!!', diffy);
             console.log('angle', 180*Math.tan(diffx/diffy)/(Math.PI));
             var dir1 = 180*Math.tan(diffx/diffy)/(Math.PI);
+            var dir1 = 90;
         break;
     }
 
@@ -188,13 +189,13 @@ var yodaImg = new Konva.Image({
 
 
 var darthVaderGroup = new Konva.Group({
-  x: 180,
-  y: 50,
+  x: 360,
+  y: 300,
   draggable: true
 });
 var yodaGroup = new Konva.Group({
-  x: 20,
-  y: 110,
+  x: 200,
+  y: 190,
   draggable: true
 });
 
