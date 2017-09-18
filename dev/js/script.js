@@ -3,13 +3,14 @@ var height = window.innerHeight;
 
 function update(activeAnchor) {
     var group = activeAnchor.getParent();
-
     var topLeft = group.get('.topLeft')[0];
     var topRight = group.get('.topRight')[0];
     var bottomRight = group.get('.bottomRight')[0];
     var bottomLeft = group.get('.bottomLeft')[0];
     var topMiddle = group.get('.topMiddle')[0];
-
+    // topMiddle.setX(0);
+    // topMiddle.setY(0);
+    
     var image = group.get('Image')[0];
 
     var anchorX = activeAnchor.getX();
@@ -17,6 +18,7 @@ function update(activeAnchor) {
             
     var rotateFlage = false;
     var dir = 0;
+
     // update anchor positions
     switch (activeAnchor.getName()) {
         case 'topLeft':
@@ -40,24 +42,36 @@ function update(activeAnchor) {
             bottomRight.setY(anchorY);
             topLeft.setX(anchorX);
             break;
+        // case 'topMiddle':
+        //     rotateFlage=true;
+        //     var diffx = topMiddle.getX() - image.width() / 2;
+        //     var diffy = image.height() / 2 - topMiddle.getY();
+        //     // console.log('height!!!!!!!', diffy);
+        //     console.log('angle', 180*Math.tan(diffx/diffy)/(Math.PI));
+        //     var dir1 = 180*Math.tan(diffx/diffy)/(Math.PI);
+        //     break;
         case 'topMiddle':
             rotateFlage=true;
-            var diffx = topMiddle.getX() - image.width() / 2;
-            var diffy = image.height() / 2 - topMiddle.getY();
+            
+            var diffx = (topMiddle.getX() - image.width() / 2);
+            var diffy = (image.height() / 2 - topMiddle.getY());
             // console.log('height!!!!!!!', diffy);
-            // console.log('angle', 180*Math.tan(diffx/diffy)/(Math.PI));
+            console.log('angle', 180*Math.tan(diffx/diffy)/(Math.PI));
             var dir1 = 180*Math.tan(diffx/diffy)/(Math.PI);
-            break;
+        break;
     }
-(dir) ? 
-console.log('dir', dir)
-:
-console.log('dir1', dir1);
 
     image.position(topLeft.position());
-            
+
+    var radius = image.height();
+    
     if(rotateFlage){
-        image.rotation(dir1);
+        group.rotation(dir1);
+// console.log('!!!! x', image.width() / 2 + radius * Math.cos(dir1));
+// console.log('!!!! y', image.height() / 2 + radius * Math.sin(dir1));
+        topMiddle.setX(image.width() / 2 + radius * Math.cos(dir1));
+        topMiddle.setY(image.height() / 2 + radius * Math.sin(dir1));
+
     }
     else{
       var width = topRight.getX() - topLeft.getX();
@@ -83,7 +97,7 @@ function addAnchor(group, x, y, name) {
         dragOnTop: false,
         offset: {
             x: 100,
-            y: 137 / 2
+            y: 138 / 2
         }
     });
     anchor.on('dragmove', function() {
@@ -152,12 +166,12 @@ stage.draw();
 // darth vader
 var darthVaderImg = new Konva.Image({
     width: 200,
-    height: 137,
+    height: 138,
     stroke: 'green',
     strokeWidth: 5,
     offset: {
         x: 100,
-        y: 137 / 2
+        y: 138 / 2
     }
 });
 // yoda
@@ -168,7 +182,7 @@ var yodaImg = new Konva.Image({
     strokeWidth: 5,
     offset: {
         x: 100,
-        y: 137 / 2
+        y: 138 / 2
     }
 });
 
@@ -235,13 +249,14 @@ shapes.push(darthVaderImg);
 shapes.push(yodaImg);
 
 function addListeners(shape) {
-  shape.on('click mousedown', (e) => {
+    shape.on('click mousedown', (e) => {
     var target = e.target;
 
     //removing selection
     shapes.forEach(shape => shape.strokeEnabled(false));
     
     target.strokeEnabled(true);
+    // target.moveToTop();
     layer.draw();
   })
 }
@@ -259,7 +274,6 @@ function createPolygon(e) {
     y: e.evt.offsetY
   };
   
-  console.log(coords);
   width = -Math.abs(coordsStart.x - coords.x);
   height = Math.abs(coordsStart.y - coords.y);
 
@@ -285,7 +299,7 @@ background.on('mousedown', (e) => {
 });
 
 background.on('mouseup', () => toggle = !toggle);
-background.on('mousemove', (e) => toggle && createPolygon(e));
+// background.on('mousemove', (e) => toggle && createPolygon(e));
 
 
 // background.on('mouseup', (e) => console.log('event', e));
