@@ -8,9 +8,7 @@ function update(activeAnchor) {
     var bottomRight = group.get('.bottomRight')[0];
     var bottomLeft = group.get('.bottomLeft')[0];
     var topMiddle = group.get('.topMiddle')[0];
-    // topMiddle.setX(0);
-    // topMiddle.setY(0);
-var emptyGroup = new Konva.Group()
+
     var image = group.get('Image')[0];
 
     var anchorX = activeAnchor.getX();
@@ -25,14 +23,18 @@ var emptyGroup = new Konva.Group()
             topRight.setY(anchorY);
             bottomLeft.setX(anchorX);
             break;
+        // case 'topRight':
+        //     rotateFlage=true;
+        //     var diffx = (topRight.getX()-topLeft.getX());
+        //     var diffy = (topRight.getY()-topLeft.getY());
+        //     var dir=(diffx < 0) ? 
+        //         180*Math.atan(diffy/diffx)/(Math.PI) - 180
+        //         :
+        //         180*Math.atan(diffy/diffx)/(Math.PI);
+        //     break;
         case 'topRight':
-            rotateFlage=true;
-            var diffx = (topRight.getX()-topLeft.getX());
-            var diffy = (topRight.getY()-topLeft.getY());
-            var dir=(diffx < 0) ? 
-                180*Math.atan(diffy/diffx)/(Math.PI) - 180
-                :
-                180*Math.atan(diffy/diffx)/(Math.PI);
+            topLeft.setY(anchorY);
+            bottomRight.setX(anchorX);
             break;
         case 'bottomRight':
             bottomLeft.setY(anchorY);
@@ -42,44 +44,43 @@ var emptyGroup = new Konva.Group()
             bottomRight.setY(anchorY);
             topLeft.setX(anchorX);
             break;
-        // case 'topMiddle':
-        //     rotateFlage=true;
-        //     var diffx = topMiddle.getX() - image.width() / 2;
-        //     var diffy = image.height() / 2 - topMiddle.getY();
-        //     // console.log('height!!!!!!!', diffy);
-        //     console.log('angle', 180*Math.tan(diffx/diffy)/(Math.PI));
-        //     var dir1 = 180*Math.tan(diffx/diffy)/(Math.PI);
-        //     break;
         case 'topMiddle':
             rotateFlage=true;
-            
-            var diffx = (topMiddle.getX() - image.width() / 2);
-            var diffy = (image.height() / 2 - topMiddle.getY());
-            // console.log('height!!!!!!!', diffy);
-            console.log('angle', 180*Math.tan(diffx/diffy)/(Math.PI));
-            var dir1 = 180*Math.tan(diffx/diffy)/(Math.PI);
-            var dir1 = 90;
+
+var center = {x: image.width() / 2, y: image.height() / 2};
+var top = {x: image.width() / 2, y: - image.height() / 2};
+var current = {x: topMiddle.getX(), y: topMiddle.getY()};
+
+var vect1 = {
+    x: top.x - center.x,
+    y: top.y - center.y
+};
+var vect2 = {
+    x: current.x - center.x,
+    y: current.y - center.y
+};
+var cosA = (vect2.x * vect1.x + vect2.y * vect1.y) / 
+    (Math.sqrt(Math.pow(vect1.x,2) + Math.pow(vect1.y,2))*
+    (Math.sqrt(Math.pow(vect2.x,2) + Math.pow(vect2.y,2))));
+var angle = 180*Math.acos(cosA)/Math.PI;
+var dir1 = (current.x > image.width() / 2) ? angle : 360 - angle;
+
         break;
     }
 
-    image.position(topLeft.position());
+    image.position({ x:0, y:0});
 
     var radius = image.height();
-    
+console.log({x: radius * cosA, y: radius * Math.sqrt(1 - Math.pow(cosA, 2))});
     if(rotateFlage){
-        group.rotation(dir1);
-// console.log('!!!! x', image.width() / 2 + radius * Math.cos(dir1));
-// console.log('!!!! y', image.height() / 2 + radius * Math.sin(dir1));
-        topMiddle.setX(image.width() / 2 + radius * Math.cos(dir1));
-        topMiddle.setY(image.height() / 2 + radius * Math.sin(dir1));
-
+        image.rotation(dir1);
     }
     else{
-      var width = topRight.getX() - topLeft.getX();
-      var height = bottomLeft.getY() - topLeft.getY();
+        var width = topRight.getX() - topLeft.getX();
+        var height = bottomLeft.getY() - topLeft.getY();
         if(width && height) {
-        image.width(width);
-        image.height(height);
+            image.width(width);
+            image.height(height);
         }
     }
 }
@@ -206,18 +207,18 @@ layer.add(yodaGroup);
 
 //adding shape&anchors to group 
 darthVaderGroup.add(darthVaderImg);
-addAnchor(darthVaderGroup, 0, 0, 'topLeft');
-addAnchor(darthVaderGroup, 200, 0, 'topRight');
-addAnchor(darthVaderGroup, 200, 138, 'bottomRight');
-addAnchor(darthVaderGroup, 0, 138, 'bottomLeft');
+// addAnchor(darthVaderGroup, 0, 0, 'topLeft');
+// addAnchor(darthVaderGroup, 200, 0, 'topRight');
+// addAnchor(darthVaderGroup, 200, 138, 'bottomRight');
+// addAnchor(darthVaderGroup, 0, 138, 'bottomLeft');
 
 addAnchor(darthVaderGroup, 100, -69, 'topMiddle');
 
 yodaGroup.add(yodaImg);
-addAnchor(yodaGroup, 0, 0, 'topLeft');
-addAnchor(yodaGroup, 93, 0, 'topRight');
-addAnchor(yodaGroup, 93, 104, 'bottomRight');
-addAnchor(yodaGroup, 0, 104, 'bottomLeft');
+// addAnchor(yodaGroup, 0, 0, 'topLeft');
+// addAnchor(yodaGroup, 93, 0, 'topRight');
+// addAnchor(yodaGroup, 93, 104, 'bottomRight');
+// addAnchor(yodaGroup, 0, 104, 'bottomLeft');
 
 addAnchor(yodaGroup, 93 / 2, -52, 'topMiddle');
 
