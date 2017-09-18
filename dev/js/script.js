@@ -229,7 +229,7 @@ imageObj1.onload = function() {
     darthVaderImg.strokeEnabled(false);
     layer.draw();
 };
-imageObj1.src = '/files/darth-vader.jpg';
+imageObj1.src = '/public/files/darth-vader.jpg';
 
 var imageObj2 = new Image();
 imageObj2.onload = function() {
@@ -237,7 +237,7 @@ imageObj2.onload = function() {
     yodaImg.strokeEnabled(false);
     layer.draw();
 };
-imageObj2.src = '/files/yoda.jpg';
+imageObj2.src = '/public/files/yoda.jpg';
 
 
 
