@@ -1,0 +1,11 @@
+{
+  "name": "project",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Roman"
+  ],
+  "homepage": "",
+  "private": true,
+  "dependencies": {}
+}

@@ -1,0 +1,40 @@
+{
+  "name": "test",
+  "version": "",
+  "description": "test",
+  "private": true,
+  "author": "Roman",
+  "scripts": {
+    "start": "gulp dev"
+  },
+  "devDependencies": {
+    "bower": "^1.8.0",
+    "connect-modrewrite": "^0.9.0",
+    "eslint": "^3.19.0",
+    "gulp": "^3.9.1",
+    "gulp-api-doc": "^1.1.0",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^2.3.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-debug": "^3.0.0",
+    "gulp-eslint": "^3.0.1",
+    "gulp-filter": "^4.0.0",
+    "gulp-install": "^0.6.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-open": "^2.0.0",
+    "gulp-order": "^1.1.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-pug": "^3.2.0",
+    "gulp-sass": "^3.0.0",
+    "gulp-sequence": "^0.4.6",
+    "gulp-sourcemaps": "^1.9.1",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.8",
+    "main-bower-files": "^2.13.1",
+    "pug": "^2.0.0-beta6"
+  },
+  "dependencies": {
+  }
+}
