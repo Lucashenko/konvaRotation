@@ -107,8 +107,8 @@ function addAnchor(group, x, y, name) {
         draggable: true,
         dragOnTop: false,
         offset: {
-            x: 100,
-            y: 138 / 2
+            x: group.children[0].attrs.width / 2,
+            y: group.children[0].attrs.height / 2
         }
     });
     anchor.on('dragmove', function() {
@@ -181,7 +181,7 @@ var darthVaderImg = new Konva.Image({
     stroke: 'green',
     strokeWidth: 5,
     offset: {
-        x: 100,
+        x: 200 / 2,
         y: 138 / 2
     }
 });
@@ -192,8 +192,8 @@ var yodaImg = new Konva.Image({
     stroke: 'green',
     strokeWidth: 5,
     offset: {
-        x: 100,
-        y: 138 / 2
+        x: 93 / 2,
+        y: 104 / 2
     }
 });
 
